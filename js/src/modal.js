@@ -462,6 +462,10 @@ class Modal extends BaseComponent {
       // Adjust fixed content padding
       SelectorEngine.find(SELECTOR_FIXED_CONTENT)
         .forEach(element => {
+          if (window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+            return
+          }
+
           const actualPadding = element.style.paddingRight
           const calculatedPadding = window.getComputedStyle(element)['padding-right']
           Manipulator.setDataAttribute(element, 'padding-right', actualPadding)
@@ -471,6 +475,10 @@ class Modal extends BaseComponent {
       // Adjust sticky content margin
       SelectorEngine.find(SELECTOR_STICKY_CONTENT)
         .forEach(element => {
+          if (window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+            return
+          }
+
           const actualMargin = element.style.marginRight
           const calculatedMargin = window.getComputedStyle(element)['margin-right']
           Manipulator.setDataAttribute(element, 'margin-right', actualMargin)
