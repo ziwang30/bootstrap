@@ -132,7 +132,7 @@ var bsCollapse = new bootstrap.Collapse(myCollapse, {
 })
 ```
 
-{{< bs-table "table" >}}
+{{< bs-table >}}
 | Method | Description |
 | --- | --- |
 | `toggle` | Toggles a collapsible element to shown or hidden. **Returns to the caller before the collapsible element has actually been shown or hidden** (i.e. before the `shown.bs.collapse` or `hidden.bs.collapse` event occurs). |
@@ -146,7 +146,7 @@ var bsCollapse = new bootstrap.Collapse(myCollapse, {
 
 Bootstrap's collapse class exposes a few events for hooking into collapse functionality.
 
-{{< bs-table "table" >}}
+{{< bs-table >}}
 | Event type | Description |
 | --- | --- |
 | `show.bs.collapse` | This event fires immediately when the `show` instance method is called. |

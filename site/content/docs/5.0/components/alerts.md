@@ -103,7 +103,7 @@ var bsAlert = new bootstrap.Alert(myAlert)
 
 This makes an alert listen for click events on descendant elements which have the `data-bs-dismiss="alert"` attribute. (Not necessary when using the data-api's auto-initialization.)
 
-{{< bs-table "table" >}}
+{{< bs-table >}}
 | Method | Description |
 | --- | --- |
 | `close` | Closes an alert by removing it from the DOM. If the `.fade` and `.show` classes are present on the element, the alert will fade out before it is removed. |
@@ -121,7 +121,7 @@ alert.close()
 
 Bootstrap's alert plugin exposes a few events for hooking into alert functionality.
 
-{{< bs-table "table" >}}
+{{< bs-table >}}
 | Event | Description |
 | --- | --- |
 | `close.bs.alert` | Fires immediately when the `close` instance method is called. |

@@ -865,7 +865,7 @@ var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
 
 Bootstrap's modal class exposes a few events for hooking into modal functionality. All modal events are fired at the modal itself (i.e. at the `<div class="modal">`).
 
-{{< bs-table "table" >}}
+{{< bs-table >}}
 | Event | Description |
 | --- | --- |
 | `show.bs.modal` | This event fires immediately when the `show` instance method is called. If caused by a click, the clicked element is available as the `relatedTarget` property of the event. |
