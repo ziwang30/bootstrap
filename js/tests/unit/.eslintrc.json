@@ -1,8 +1,21 @@
 {
   "extends": [
-    "../../../.eslintrc.json"
+    "../../../.eslintrc.json",
+    "plugin:jasmine/recommended"
   ],
   "env": {
     "jasmine": true
+  },
+  "plugins": [
+    "jasmine"
+  ],
+  "rules": {
+    "jasmine/expect-single-argument": "off",
+    "jasmine/new-line-before-expect": "off",
+    "jasmine/no-spec-dupes": [
+      "error",
+      "branch"
+    ]
+    "jasmine/prefer-toHaveBeenCalledWith": "off"
   }
 }
