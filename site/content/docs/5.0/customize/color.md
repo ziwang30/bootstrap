@@ -106,3 +106,40 @@ Here's how you can use these in your Sass:
 ```
 
 [Color utility classes]({{< docsref "/utilities/colors" >}}) are also available for setting `color` and `background-color` using the `500` color values.
+
+## Generating utilities
+
+Bootstrap doesn't include `color` and `background-color` utilities for every individual color, but you can generate these yourself with our [utility API]({{< docsref "/utilities/api" >}}).
+
+1. To start, make sure you've imported our functions, variables, mixins, and utilities.
+2. Then include the `utilities/_color-extended.scss` stylesheet to access a full suite of color Sass maps.
+3. Next, use our `combo-map()` function to quickly merge multiple Sass maps together in a new map.
+4. Lastly, merge this new combined map to extend any utility with a `{color}-{level}` class name.
+
+Here is an example approach in action for text colors.
+
+```scss
+@import "bootstrap/scss/utilities";
+@import "utilities/color-extended";
+
+$all-colors: combo-map($grays, $blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "width"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+```
+
+The above will generate new `.text-{color}-{level}` utilities for every color and level. You can do the same for any other utility as well.
