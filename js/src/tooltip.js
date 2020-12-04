@@ -15,6 +15,7 @@ import {
   getUID,
   isElement,
   isRTL,
+  isTouchEnabledDevice,
   noop,
   typeCheckConfig
 } from './util/index'
@@ -296,7 +297,7 @@ class Tooltip extends BaseComponent {
     // empty mouseover listeners to the body's immediate children;
     // only needed because of broken event delegation on iOS
     // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-    if ('ontouchstart' in document.documentElement) {
+    if (isTouchEnabledDevice) {
       [].concat(...document.body.children).forEach(element => {
         EventHandler.on(element, 'mouseover', noop())
       })
@@ -352,9 +353,10 @@ class Tooltip extends BaseComponent {
 
     // If this is a touch-enabled device we remove the extra
     // empty mouseover listeners we added for iOS support
-    if ('ontouchstart' in document.documentElement) {
-      [].concat(...document.body.children)
-        .forEach(element => EventHandler.off(element, 'mouseover', noop))
+    if (isTouchEnabledDevice) {
+      [].concat(...document.body.children).forEach(element => {
+        EventHandler.off(element, 'mouseover', noop)
+      })
     }
 
     this._activeTrigger[TRIGGER_CLICK] = false
