@@ -112,11 +112,11 @@ Here's how you can use these in your Sass:
 Bootstrap doesn't include `color` and `background-color` utilities for every individual color, but you can generate these yourself with our [utility API]({{< docsref "/utilities/api" >}}).
 
 1. To start, make sure you've imported our functions, variables, mixins, and utilities.
-2. Then include the `utilities/_color-extended.scss` stylesheet to access a full suite of color Sass maps.
-3. Next, use our `combo-map()` function to quickly merge multiple Sass maps together in a new map.
-4. Lastly, merge this new combined map to extend any utility with a `{color}-{level}` class name.
+2. Include `utilities/_color-extended.scss` to access all our color Sass maps.
+3. Use our `combo-map()` function to quickly merge multiple Sass maps together in a new map.
+4. Merge this new combined map to extend any utility with a `{color}-{level}` class name.
 
-Here is an example approach in action for text colors.
+Here's an example that generates text color utilities (e.g., `.text-purple-500`) using the above steps.
 
 ```scss
 @import "bootstrap/scss/utilities";
@@ -142,4 +142,4 @@ $utilities: map-merge(
 );
 ```
 
-The above will generate new `.text-{color}-{level}` utilities for every color and level. You can do the same for any other utility as well.
+This will generate new `.text-{color}-{level}` utilities for every color and level. You can do the same for any other utility and property as well.
