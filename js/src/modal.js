@@ -462,7 +462,7 @@ class Modal extends BaseComponent {
       // Adjust fixed content padding
       SelectorEngine.find(SELECTOR_FIXED_CONTENT)
         .forEach(element => {
-          if (window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+          if (this._isShorterThanWindow(element)) {
             return
           }
 
@@ -475,7 +475,7 @@ class Modal extends BaseComponent {
       // Adjust sticky content margin
       SelectorEngine.find(SELECTOR_STICKY_CONTENT)
         .forEach(element => {
-          if (window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+          if (this._isShorterThanWindow(element)) {
             return
           }
 
@@ -534,6 +534,10 @@ class Modal extends BaseComponent {
     const scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth
     document.body.removeChild(scrollDiv)
     return scrollbarWidth
+  }
+
+  _isShorterThanWindow(element) {
+    return window.innerWidth > element.clientWidth + this._scrollbarWidth
   }
 
   // Static
