@@ -461,29 +461,11 @@ class Modal extends BaseComponent {
 
       // Adjust fixed content padding
       SelectorEngine.find(SELECTOR_FIXED_CONTENT)
-        .forEach(element => {
-          if (this._isShorterThanWindow(element)) {
-            return
-          }
-
-          const actualPadding = element.style.paddingRight
-          const calculatedPadding = window.getComputedStyle(element)['padding-right']
-          Manipulator.setDataAttribute(element, 'padding-right', actualPadding)
-          element.style.paddingRight = `${Number.parseFloat(calculatedPadding) + this._scrollbarWidth}px`
-        })
+        .forEach(element => this._setElementAttributes(element, 'paddingRight'))
 
       // Adjust sticky content margin
       SelectorEngine.find(SELECTOR_STICKY_CONTENT)
-        .forEach(element => {
-          if (this._isShorterThanWindow(element)) {
-            return
-          }
-
-          const actualMargin = element.style.marginRight
-          const calculatedMargin = window.getComputedStyle(element)['margin-right']
-          Manipulator.setDataAttribute(element, 'margin-right', actualMargin)
-          element.style.marginRight = `${Number.parseFloat(calculatedMargin) - this._scrollbarWidth}px`
-        })
+        .forEach(element => this._setElementAttributes(element, 'marginRight'))
 
       // Adjust body padding
       const actualPadding = document.body.style.paddingRight
@@ -499,23 +481,11 @@ class Modal extends BaseComponent {
   _resetScrollbar() {
     // Restore fixed content padding
     SelectorEngine.find(SELECTOR_FIXED_CONTENT)
-      .forEach(element => {
-        const padding = Manipulator.getDataAttribute(element, 'padding-right')
-        if (typeof padding !== 'undefined') {
-          Manipulator.removeDataAttribute(element, 'padding-right')
-          element.style.paddingRight = padding
-        }
-      })
+      .forEach(element => this._removeElementAttributes(element, 'paddingRight'))
 
     // Restore sticky content and navbar-toggler margin
     SelectorEngine.find(`${SELECTOR_STICKY_CONTENT}`)
-      .forEach(element => {
-        const margin = Manipulator.getDataAttribute(element, 'margin-right')
-        if (typeof margin !== 'undefined') {
-          Manipulator.removeDataAttribute(element, 'margin-right')
-          element.style.marginRight = margin
-        }
-      })
+      .forEach(element => this._removeElementAttributes(element, 'marginRight'))
 
     // Restore body padding
     const padding = Manipulator.getDataAttribute(document.body, 'padding-right')
@@ -536,8 +506,27 @@ class Modal extends BaseComponent {
     return scrollbarWidth
   }
 
-  _isShorterThanWindow(element) {
-    return window.innerWidth > element.clientWidth + this._scrollbarWidth
+  _setElementAttributes(element, cssProp) {
+    if (window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+      return
+    }
+
+    const actualValue = element.style[cssProp]
+    const computedValue = window.getComputedStyle(element)[cssProp]
+    Manipulator.setDataAttribute(element, cssProp, actualValue)
+    if (cssProp === 'marginRight') {
+      element.style[cssProp] = `${Number.parseFloat(computedValue) - this._scrollbarWidth}px`
+    } else {
+      element.style[cssProp] = `${Number.parseFloat(computedValue) + this._scrollbarWidth}px`
+    }
+  }
+
+  _removeElementAttributes(element, cssProp) {
+    const cssValue = Manipulator.getDataAttribute(element, cssProp)
+    if (typeof cssValue !== 'undefined') {
+      Manipulator.removeDataAttribute(element, cssProp)
+      element.style[cssProp] = cssValue
+    }
   }
 
   // Static
