@@ -513,7 +513,9 @@ class Modal extends BaseComponent {
 
     const actualValue = element.style[cssProp]
     const computedValue = window.getComputedStyle(element)[cssProp]
+
     Manipulator.setDataAttribute(element, cssProp, actualValue)
+
     if (cssProp === 'marginRight') {
       element.style[cssProp] = `${Number.parseFloat(computedValue) - this._scrollbarWidth}px`
     } else {
