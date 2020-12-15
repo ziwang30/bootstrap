@@ -516,11 +516,9 @@ class Modal extends BaseComponent {
 
     Manipulator.setDataAttribute(element, cssProp, actualValue)
 
-    if (cssProp === 'marginRight') {
-      element.style[cssProp] = `${Number.parseFloat(computedValue) - this._scrollbarWidth}px`
-    } else {
-      element.style[cssProp] = `${Number.parseFloat(computedValue) + this._scrollbarWidth}px`
-    }
+    element.style[cssProp] = cssProp === 'marginRight' ?
+      `${Number.parseFloat(computedValue) - this._scrollbarWidth}px` :
+      `${Number.parseFloat(computedValue) + this._scrollbarWidth}px`
   }
 
   _removeElementAttributes(element, cssProp) {
