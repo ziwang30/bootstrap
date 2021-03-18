@@ -396,10 +396,10 @@ class Carousel extends BaseComponent {
 
       const indicators = SelectorEngine.find(SELECTOR_INDICATOR, this._indicatorsElement)
 
-      for (let i = 0; i < indicators.length; i++) {
-        if (Number.parseInt(indicators[i].getAttribute('data-bs-slide-to'), 10) === this._getItemIndex(element)) {
-          indicators[i].classList.add(CLASS_NAME_ACTIVE)
-          indicators[i].setAttribute('aria-current', 'true')
+      for (const indicator of indicators) {
+        if (Number.parseInt(indicator.getAttribute('data-bs-slide-to'), 10) === this._getItemIndex(element)) {
+          indicator.classList.add(CLASS_NAME_ACTIVE)
+          indicator.setAttribute('aria-current', 'true')
           break
         }
       }
@@ -612,8 +612,8 @@ EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_SLIDE, Carousel.da
 EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
   const carousels = SelectorEngine.find(SELECTOR_DATA_RIDE)
 
-  for (let i = 0, len = carousels.length; i < len; i++) {
-    Carousel.carouselInterface(carousels[i], Data.get(carousels[i], DATA_KEY))
+  for (const carousel of carousels) {
+    Carousel.carouselInterface(carousel, Data.get(carousel, DATA_KEY))
   }
 })
 

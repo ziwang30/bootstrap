@@ -16,9 +16,9 @@ describe('Modal', () => {
 
     style = document.createElement('style')
     style.type = 'text/css'
-    style.appendChild(document.createTextNode(css))
+    style.append(document.createTextNode(css))
 
-    document.head.appendChild(style)
+    document.head.append(style)
 
     // Simulate scrollbars
     document.documentElement.style.paddingRight = '16px'
@@ -33,14 +33,14 @@ describe('Modal', () => {
 
     document.querySelectorAll('.modal-backdrop')
       .forEach(backdrop => {
-        document.body.removeChild(backdrop)
+        backdrop.remove()
       })
 
     document.body.style.paddingRight = '0px'
   })
 
   afterAll(() => {
-    document.head.removeChild(style)
+    style.remove()
     document.documentElement.style.paddingRight = '0px'
   })
 
@@ -190,8 +190,8 @@ describe('Modal', () => {
       const styleTest = document.createElement('style')
 
       styleTest.type = 'text/css'
-      styleTest.appendChild(document.createTextNode('body { padding-right: 7px; }'))
-      document.head.appendChild(styleTest)
+      styleTest.append(document.createTextNode('body { padding-right: 7px; }'))
+      document.head.append(styleTest)
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -202,7 +202,7 @@ describe('Modal', () => {
 
       modalEl.addEventListener('hidden.bs.modal', () => {
         expect(window.getComputedStyle(document.body).paddingLeft).toEqual('0px', 'body does not have inline padding set')
-        document.head.removeChild(styleTest)
+        styleTest.remove()
         done()
       })
 
@@ -214,9 +214,9 @@ describe('Modal', () => {
       const styleTest = document.createElement('style')
 
       styleTest.type = 'text/css'
-      styleTest.appendChild(document.createTextNode('body { padding-right: 7px; }'))
+      styleTest.append(document.createTextNode('body { padding-right: 7px; }'))
 
-      document.head.appendChild(styleTest)
+      document.head.append(styleTest)
       document.body.style.color = 'red'
 
       const modalEl = fixtureEl.querySelector('.modal')
@@ -231,7 +231,7 @@ describe('Modal', () => {
 
         expect(bodyPaddingRight === '0px' || bodyPaddingRight === '').toEqual(true, 'body does not have inline padding set')
         expect(document.body.style.color).toEqual('red', 'body still has other inline styles set')
-        document.head.removeChild(styleTest)
+        styleTest.remove()
         document.body.removeAttribute('style')
         done()
       })
@@ -321,7 +321,7 @@ describe('Modal', () => {
       modalEl.addEventListener('shown.bs.modal', () => {
         const dynamicModal = document.getElementById(id)
         expect(dynamicModal).toBeDefined()
-        dynamicModal.parentNode.removeChild(dynamicModal)
+        dynamicModal.remove()
         done()
       })
 

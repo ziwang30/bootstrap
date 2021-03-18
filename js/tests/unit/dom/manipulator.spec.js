@@ -100,10 +100,10 @@ describe('Manipulator', () => {
 
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(false)
 
-      div.setAttribute('data-bs-test', 'true')
+      div.dataset.bsTest = 'true'
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(true)
 
-      div.setAttribute('data-bs-test', '1')
+      div.dataset.bsTest = '1'
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(1)
     })
   })
