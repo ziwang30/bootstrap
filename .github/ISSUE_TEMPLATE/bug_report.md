@@ -33,7 +33,7 @@ assignees: ''
 [ Bootstrap 4 [template](https://codepen.io/team/bootstrap/pen/yLabNQL) ]
 [ Bootstrap 5 [template](https://codepen.io/team/bootstrap/pen/qBamdLj) ]
 
->#### Environment
+### Environment
 * *Operating system & version:* [Windows, macOS, Android, iOS]
 * *Browser & version:* [Chrome, Firefox, Safari, Microsoft Edge, Opera, Android Browser]
 * *Bs version:* [3, 4, 5]
